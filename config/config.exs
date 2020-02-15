@@ -10,6 +10,11 @@ use Mix.Config
 config :user_service,
   ecto_repos: [UserService.Repo]
 
+config :user_service, :pow,
+  user: UserService.Users.User,
+  repo: UserService.Repo,
+  web_module: UserServiceWeb
+
 # Configures the endpoint
 config :user_service, UserServiceWeb.Endpoint,
   url: [host: "localhost"],

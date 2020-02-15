@@ -1,5 +1,6 @@
 defmodule UserServiceWeb.Router do
   use UserServiceWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,10 +14,14 @@ defmodule UserServiceWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", UserServiceWeb do
+  scope "/" do
     pipe_through :browser
 
-    get "/", PageController, :index
+    pow_routes()
+  end
+
+  scope "/", UserServiceWeb do
+    pipe_through :browser
   end
 
   # Other scopes may use custom stacks.

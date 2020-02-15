@@ -43,5 +43,6 @@ defmodule UserServiceWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug Pow.Plug.Session, otp_app: :user_service
   plug UserServiceWeb.Router
 end
