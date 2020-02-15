@@ -8,12 +8,15 @@
 use Mix.Config
 
 config :user_service,
-  ecto_repos: [UserService.Repo]
+  ecto_repos: [UserService.Repo],
+  redis_uri: "redis://localhost:6379",
+  redis_namespace: "user-service-#{Mix.env()}"
 
 config :user_service, :pow,
+  cache_store_backend: UserServiceWeb.Pow.RedisCache,
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   extensions: [PowResetPassword, PowEmailConfirmation],
-  mailer_backend: UserServiceWeb.PowMailer,
+  mailer_backend: UserServiceWeb.Pow.Mailer,
   repo: UserService.Repo,
   user: UserService.Users.User,
   web_module: UserServiceWeb

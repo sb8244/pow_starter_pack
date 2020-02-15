@@ -1,4 +1,4 @@
-defmodule UserServiceWeb.PowMailer do
+defmodule UserServiceWeb.Pow.Mailer do
   use Pow.Phoenix.Mailer
   require Logger
 
