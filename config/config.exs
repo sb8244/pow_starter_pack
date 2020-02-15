@@ -11,8 +11,11 @@ config :user_service,
   ecto_repos: [UserService.Repo]
 
 config :user_service, :pow,
-  user: UserService.Users.User,
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  extensions: [PowResetPassword, PowEmailConfirmation],
+  mailer_backend: UserServiceWeb.PowMailer,
   repo: UserService.Repo,
+  user: UserService.Users.User,
   web_module: UserServiceWeb
 
 # Configures the endpoint

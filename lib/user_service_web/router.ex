@@ -1,6 +1,7 @@
 defmodule UserServiceWeb.Router do
   use UserServiceWeb, :router
   use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router, extensions: [PowResetPassword, PowEmailConfirmation]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,10 +19,17 @@ defmodule UserServiceWeb.Router do
     pipe_through :browser
 
     pow_routes()
+    pow_extension_routes()
+
+    get "/login", Pow.Phoenix.SessionController, :new
+    get "/logout", Pow.Phoenix.SessionController, :delete
+    get "/register", Pow.Phoenix.RegistrationController, :new
   end
 
   scope "/", UserServiceWeb do
     pipe_through :browser
+
+    get "/", PlaceholderController, :show
   end
 
   # Other scopes may use custom stacks.

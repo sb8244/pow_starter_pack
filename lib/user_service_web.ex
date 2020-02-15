@@ -60,6 +60,15 @@ defmodule UserServiceWeb do
     end
   end
 
+  def mailer_view do
+    quote do
+      use Phoenix.View, root: "lib/user_service_web/templates",
+                        namespace: UserServiceWeb
+
+      use Phoenix.HTML
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
