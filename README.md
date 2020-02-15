@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Setup Redis cache store with namespace
-- [ ] Make cookie live longer than session (possibly persistent extension)
+- [x] Make cookie live longer than session (possibly persistent extension)
 - [ ] Setup mailer
 - [ ] SSO API server
 - [ ] Sign in with redirection
