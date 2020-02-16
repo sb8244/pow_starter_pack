@@ -30,6 +30,9 @@ config :user_service, UserServiceWeb.Endpoint,
     ]
   ]
 
+config :user_service,
+  sso_cookie_domain: ".localhost.development"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

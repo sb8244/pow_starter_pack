@@ -9,10 +9,12 @@ defmodule UserServiceWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug UserServiceWeb.Pow.SsoExtension.CleanupPlug
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug UserServiceWeb.Pow.SsoExtension.CleanupPlug
   end
 
   scope "/" do
@@ -21,9 +23,9 @@ defmodule UserServiceWeb.Router do
     pow_routes()
     pow_extension_routes()
 
-    get "/login", Pow.Phoenix.SessionController, :new
-    get "/logout", Pow.Phoenix.SessionController, :delete
-    get "/register", Pow.Phoenix.RegistrationController, :new
+    get "/login", Pow.Phoenix.SessionController, :new, as: :login
+    get "/logout", Pow.Phoenix.SessionController, :delete, as: :logout
+    get "/register", Pow.Phoenix.RegistrationController, :new, as: :register
   end
 
   scope "/", UserServiceWeb do
