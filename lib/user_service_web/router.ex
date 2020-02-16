@@ -9,12 +9,12 @@ defmodule UserServiceWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug UserServiceWeb.Plug.SsoExtension.SsoPlug
+    plug UserService.Sso.plug()
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug UserServiceWeb.Plug.SsoExtension.SsoPlug
+    plug UserService.Sso.plug()
   end
 
   scope "/" do

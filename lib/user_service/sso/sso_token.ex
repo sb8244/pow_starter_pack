@@ -1,4 +1,4 @@
-defmodule UserService.Users.SsoToken do
+defmodule UserService.Sso.SsoToken do
   use Ecto.Schema
   import Ecto.Changeset
 
