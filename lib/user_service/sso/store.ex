@@ -18,6 +18,13 @@ defmodule UserService.Sso.Store do
     |> Repo.insert!()
   end
 
+  def find_valid_token(token) do
+    now = DateTime.utc_now()
+
+    from(sso in SsoToken, where: sso.token == ^token and sso.expires_at > ^now)
+    |> Repo.one()
+  end
+
   def delete_sso_token(token: token) do
     from(sso in SsoToken, where: sso.token == ^token)
     |> Repo.delete_all()

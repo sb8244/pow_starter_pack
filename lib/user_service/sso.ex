@@ -4,7 +4,24 @@ defmodule UserService.Sso do
   by other domains under the same parent in order to provide server-server verified SSO session.
   """
 
-  def plug() do
-    __MODULE__.Plug
+  alias __MODULE__.{Cookie, Plug, Store}
+
+  def plug(), do: Plug
+
+  def get_user_for_sso_token(sso_token) do
+    with {:verify, {:valid, %{token: token}}} <- {:verify, Cookie.verify_session(sso_token)},
+         {:find_token, %{user_id: id}} <- {:find_token, Store.find_valid_token(token)},
+         {:find_user, user = %{}} <- {:find_user, UserService.Users.get_user(id)} do
+      {:ok, user}
+    else
+      {:verify, _} ->
+        {:error, :verifying_session}
+
+      {:find_token, _} ->
+        {:error, :finding_token}
+
+      {:find_user, _} ->
+        {:error, :finding_user}
+    end
   end
 end
