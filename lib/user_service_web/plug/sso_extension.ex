@@ -12,13 +12,10 @@ defmodule UserServiceWeb.Plug.SsoExtension do
     Application.get_env(:user_service, :sso_cookie_domain)
   end
 
-  @one_month 60 * 60 * 24 * 30
-
-  def sign_token() do
+  def sign_token(%{token: token, expires_at: expires_at}) do
     secret = Application.get_env(:user_service, :sso_secret)
-    expires_at = System.system_time(:second) + @one_month
 
-    Phoenix.Token.sign(secret, "sso_salt", %{token: "TODO", expires_at: expires_at})
+    Phoenix.Token.sign(secret, "sso_salt", %{token: token, expires_at: expires_at})
   end
 
   def verify_session(token) do
@@ -47,7 +44,6 @@ defmodule UserServiceWeb.Plug.SsoExtension do
     Sets the cookie with a valid SSO session if the user is logged in.
     """
 
-    import Plug.Conn
     require Logger
 
     alias UserServiceWeb.Plug.SsoExtension
@@ -59,51 +55,59 @@ defmodule UserServiceWeb.Plug.SsoExtension do
     def call(conn, _opts) do
       case Pow.Plug.current_user(conn) do
         nil ->
-          clear_sso_cookie(conn)
+          clear_sso_session(conn)
 
-        _user ->
-          ensure_sso_session(conn)
+        user ->
+          ensure_sso_session(conn, user: user)
       end
     end
 
-    defp clear_sso_cookie(conn) do
+    defp clear_sso_session(conn) do
       case Map.get(conn.cookies, SsoExtension.cookie_name()) do
         nil ->
           conn
 
         sso_token ->
-          IO.inspect "TODO: Cleanup #{sso_token}"
+          case SsoExtension.verify_session(sso_token) do
+            {type, %{token: token}} when type in [:valid, :expired] ->
+              UserService.Users.delete_sso_token(token: token)
+
+            {:invalid, e} ->
+              Logger.error("#{__MODULE__}.clear_sso_session type=verify_session error=#{inspect e}")
+          end
+
           Plug.Conn.delete_resp_cookie(conn, SsoExtension.cookie_name(), domain: SsoExtension.cookie_domain())
       end
     end
 
-    defp ensure_sso_session(conn) do
+    defp ensure_sso_session(conn, user: user) do
       case Map.get(conn.cookies, SsoExtension.cookie_name()) do
         nil ->
-          setup_sso_session(conn)
+          setup_sso_session(conn, user: user)
 
         token ->
-          # Is cookie still valid?
-          verify_sso_session(conn, token)
+          verify_sso_session(conn, token, user: user)
       end
     end
 
-    defp setup_sso_session(conn) do
-      token = SsoExtension.sign_token()
+    defp setup_sso_session(conn, user: user) do
+      sso_token = UserService.Users.create_sso_token_for_user!(user)
+      token = SsoExtension.sign_token(sso_token)
       Plug.Conn.put_resp_cookie(conn, SsoExtension.cookie_name(), token, domain: SsoExtension.cookie_domain())
     end
 
-    defp verify_sso_session(conn, token) do
+    defp verify_sso_session(conn, token, user: user) do
       case SsoExtension.verify_session(token) do
         {:valid, _} ->
+          # Everything looks good, no changes needed
           conn
 
         {:expired, %{token: token}} ->
-          IO.inspect "TODO: Delete the expired SSO entry"
-          setup_sso_session(conn)
+          UserService.Users.delete_sso_token(token: token)
+          setup_sso_session(conn, user: user)
 
         {:invalid, e} ->
-          Logger.error("#{__MODULE__} type=decrypting_token error=#{inspect e}")
+          Logger.error("#{__MODULE__}.verify_sso_session type=verify_session error=#{inspect e}")
           conn
       end
     end
