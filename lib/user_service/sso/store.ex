@@ -13,6 +13,7 @@ defmodule UserService.Sso.Store do
 
   def create_sso_token_for_user!(_user = %{id: user_id}) when not is_nil(user_id) do
     expiry = (System.system_time(:second) + @one_month) |> DateTime.from_unix!()
+
     SsoToken.changeset(%{token: :random, expires_at: expiry, user_id: user_id})
     |> Repo.insert!()
   end

@@ -44,6 +44,7 @@ defmodule UserServiceWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug Pow.Plug.Session, otp_app: :user_service
+
   plug PowPersistentSession.Plug.Cookie,
     persistent_session_ttl: 1000 * 60 * 60 * 24 * 60
 

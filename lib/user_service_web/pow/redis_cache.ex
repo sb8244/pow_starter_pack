@@ -5,7 +5,8 @@ defmodule UserServiceWeb.Pow.RedisCache do
 
   @impl true
   def put(config, record_or_records) do
-    ttl      = Config.get(config, :ttl) || raise_ttl_error()
+    ttl = Config.get(config, :ttl) || raise_ttl_error()
+
     commands =
       record_or_records
       |> List.wrap()
@@ -42,7 +43,7 @@ defmodule UserServiceWeb.Pow.RedisCache do
       |> to_binary_redis_key()
 
     case Redix.command(UserService.Redix.instance_name(), ["GET", key]) do
-      {:ok, nil}   -> :not_found
+      {:ok, nil} -> :not_found
       {:ok, value} -> :erlang.binary_to_term(value)
     end
   end
@@ -54,16 +55,19 @@ defmodule UserServiceWeb.Pow.RedisCache do
     Stream.resource(
       fn -> do_scan(config, compiled_match_spec, "0") end,
       &stream_scan(config, compiled_match_spec, &1),
-      fn _ -> :ok end)
+      fn _ -> :ok end
+    )
     |> Enum.to_list()
   end
 
   defp stream_scan(_config, _compiled_match_spec, {[], "0"}), do: {:halt, nil}
+
   defp stream_scan(config, compiled_match_spec, {[], iterator}) do
     result = do_scan(config, compiled_match_spec, iterator)
 
     stream_scan(config, compiled_match_spec, result)
   end
+
   defp stream_scan(_config, _compiled_match_spec, {keys, iterator}), do: {keys, {[], iterator}}
 
   defp do_scan(config, compiled_match_spec, iterator) do
@@ -95,6 +99,7 @@ defmodule UserServiceWeb.Pow.RedisCache do
   defp unwrap([_namespace | key]), do: key
 
   defp populate_values([], _config), do: []
+
   defp populate_values(records, config) do
     binary_keys = Enum.map(records, fn {key, nil} -> binary_redis_key(config, key) end)
 
@@ -111,6 +116,7 @@ defmodule UserServiceWeb.Pow.RedisCache do
   defp zip_values([{key, nil} | next1], [value | next2]) do
     [{key, value} | zip_values(next1, next2)]
   end
+
   defp zip_values(_, []), do: []
   defp zip_values([], _), do: []
 

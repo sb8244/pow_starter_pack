@@ -38,7 +38,7 @@ defmodule UserService.Sso.Plug do
             SsoStore.delete_sso_token(token: token)
 
           {:invalid, e} ->
-            Logger.error("#{__MODULE__}.clear_sso_session type=verify_session error=#{inspect e}")
+            Logger.error("#{__MODULE__}.clear_sso_session type=verify_session error=#{inspect(e)}")
         end
 
         Plug.Conn.delete_resp_cookie(conn, Cookie.cookie_name(), domain: Cookie.cookie_domain())
@@ -72,7 +72,7 @@ defmodule UserService.Sso.Plug do
         setup_sso_session(conn, user: user)
 
       {:invalid, e} ->
-        Logger.error("#{__MODULE__}.verify_sso_session type=verify_session error=#{inspect e}")
+        Logger.error("#{__MODULE__}.verify_sso_session type=verify_session error=#{inspect(e)}")
         conn
     end
   end
