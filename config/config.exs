@@ -19,6 +19,7 @@ config :user_service, :pow,
   extensions: [PowResetPassword, PowEmailConfirmation, PowPersistentSession],
   mailer_backend: UserServiceWeb.Pow.Mailer,
   repo: UserService.Repo,
+  routes_backend: UserServiceWeb.Pow.Routes,
   user: UserService.Users.User,
   web_module: UserServiceWeb
 

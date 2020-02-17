@@ -9,6 +9,7 @@ defmodule UserServiceWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug UserServiceWeb.Plug.RedirectTo
     plug UserService.Sso.plug()
   end
 
@@ -32,6 +33,7 @@ defmodule UserServiceWeb.Router do
     pipe_through :browser
 
     get "/", PlaceholderController, :show
+    get "/external_redirect", ExternalRedirectController, :show, as: :external_redirect
   end
 
   # Other scopes may use custom stacks.
