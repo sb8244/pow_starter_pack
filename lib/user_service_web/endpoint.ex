@@ -48,5 +48,7 @@ defmodule UserServiceWeb.Endpoint do
   plug PowPersistentSession.Plug.Cookie,
     persistent_session_ttl: 1000 * 60 * 60 * 24 * 60
 
+  plug UserService.Sso.plug()
+
   plug UserServiceWeb.Router
 end

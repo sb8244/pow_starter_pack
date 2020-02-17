@@ -10,12 +10,10 @@ defmodule UserServiceWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug UserServiceWeb.Plug.RedirectTo
-    plug UserService.Sso.plug()
   end
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug UserService.Sso.plug()
   end
 
   scope "/" do
