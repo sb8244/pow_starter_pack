@@ -22,20 +22,21 @@ defmodule UserServiceWeb.Router do
     pow_routes()
     pow_extension_routes()
 
-    get "/login", Pow.Phoenix.SessionController, :new, as: :login
-    get "/logout", Pow.Phoenix.SessionController, :delete, as: :logout
-    get "/register", Pow.Phoenix.RegistrationController, :new, as: :register
+    get "login", Pow.Phoenix.SessionController, :new, as: :login
+    get "logout", Pow.Phoenix.SessionController, :delete, as: :logout
+    get "register", Pow.Phoenix.RegistrationController, :new, as: :register
   end
 
   scope "/", UserServiceWeb do
     pipe_through :browser
 
+    get "external_redirect", ExternalRedirectController, :show, as: :external_redirect
     get "/", PlaceholderController, :show
-    get "/external_redirect", ExternalRedirectController, :show, as: :external_redirect
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", UserServiceWeb do
-  #   pipe_through :api
-  # end
+  scope "/sso_api", UserServiceWeb do
+    pipe_through :api
+
+    post "verify", Sso.VerifyController, :create
+  end
 end

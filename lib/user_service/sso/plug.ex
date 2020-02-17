@@ -55,10 +55,12 @@ defmodule UserService.Sso.Plug do
     end
   end
 
+  @one_month 60 * 60 * 24 * 30
+
   defp setup_sso_session(conn, user: user) do
     sso_token = SsoStore.create_sso_token_for_user!(user)
     token = Cookie.sign_token(sso_token)
-    Plug.Conn.put_resp_cookie(conn, Cookie.cookie_name(), token, domain: Cookie.cookie_domain())
+    Plug.Conn.put_resp_cookie(conn, Cookie.cookie_name(), token, domain: Cookie.cookie_domain(), max_age: @one_month)
   end
 
   defp verify_sso_session(conn, token, user: user) do
