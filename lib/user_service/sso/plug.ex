@@ -18,6 +18,15 @@ defmodule UserService.Sso.Plug do
   end
 
   def call(conn, _opts) do
+    conn =
+      case conn.params["new_session"] do
+        "true" ->
+          clear_sso_session(conn)
+
+        _ ->
+          conn
+      end
+
     case Pow.Plug.current_user(conn) do
       nil ->
         clear_sso_session(conn)
