@@ -12,10 +12,10 @@ defmodule UserServiceWeb.Sso.VerifyController do
         conn
         |> json(serialize(user))
 
-      _ ->
+      {:error, reason} ->
         conn
         |> put_status(422)
-        |> json(%{error: "invalid token"})
+        |> json(%{error: "invalid_token", reason: reason})
     end
   end
 

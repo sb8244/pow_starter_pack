@@ -14,7 +14,10 @@ defmodule UserService.Sso do
          {:find_user, user = %{}} <- {:find_user, UserService.Users.get_user(id)} do
       {:ok, user}
     else
-      {:verify, _} ->
+      {:verify, {:invalid, _}} ->
+        {:error, :invalid_session}
+
+      {:verify, e} ->
         {:error, :verifying_session}
 
       {:find_token, _} ->
