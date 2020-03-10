@@ -1,5 +1,12 @@
 Hi,
 
-Please use the following link to confirm your e-mail address:
+Welcome to APP_NAME, thanks for signing up! You're on your way to DO_SOMETHING_GREAT.
+
+To get started, Confirm your email address using the following link and follow the setup in app!
 
 <%= @url %>
+
+We hope you enjoy THE_PRODUCT. You can reply to this email if you have any questions, we'll get back to you as soon as possible.
+
+Thanks,
+The Team at APP_NAME

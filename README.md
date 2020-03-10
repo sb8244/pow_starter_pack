@@ -6,4 +6,4 @@
 - [x] SSO API server
 - [ ] Review all messages (Pow.Phoenix.Messages, [Pow Extension].Phoenix.Messages)
 - [ ] Setup mailer
-- [ ] SSO API server auth
+- [ ] SSO API server auth (JWT token auth)

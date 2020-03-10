@@ -17,7 +17,7 @@ defmodule UserService.Sso do
       {:verify, {:invalid, _}} ->
         {:error, :invalid_session}
 
-      {:verify, e} ->
+      {:verify, _e} ->
         {:error, :verifying_session}
 
       {:find_token, _} ->

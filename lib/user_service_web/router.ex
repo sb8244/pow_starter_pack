@@ -22,21 +22,25 @@ defmodule UserServiceWeb.Router do
     pow_routes()
     pow_extension_routes()
 
-    get "login", Pow.Phoenix.SessionController, :new, as: :login
-    get "logout", Pow.Phoenix.SessionController, :delete, as: :logout
-    get "register", Pow.Phoenix.RegistrationController, :new, as: :register
+    get "/login", Pow.Phoenix.SessionController, :new, as: :login
+    get "/logout", Pow.Phoenix.SessionController, :delete, as: :logout
+    get "/register", Pow.Phoenix.RegistrationController, :new, as: :register
+
+    if Mix.env == :dev do
+      forward "/sent_emails", Bamboo.SentEmailViewerPlug
+    end
   end
 
   scope "/", UserServiceWeb do
     pipe_through :browser
 
-    get "external_redirect", ExternalRedirectController, :show, as: :external_redirect
+    get "/external_redirect", ExternalRedirectController, :show, as: :external_redirect
     get "/", PlaceholderController, :show
   end
 
   scope "/sso_api", UserServiceWeb do
     pipe_through :api
 
-    post "verify", Sso.VerifyController, :create
+    post "/verify", Sso.VerifyController, :create
   end
 end

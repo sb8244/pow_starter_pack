@@ -21,7 +21,8 @@ config :user_service, :pow,
   repo: UserService.Repo,
   routes_backend: UserServiceWeb.Pow.Routes,
   user: UserService.Users.User,
-  web_module: UserServiceWeb
+  web_module: UserServiceWeb,
+  web_mailer_module: UserServiceWeb
 
 # Configures the endpoint
 config :user_service, UserServiceWeb.Endpoint,

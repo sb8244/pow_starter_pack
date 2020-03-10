@@ -17,6 +17,7 @@ config :user_service, UserService.Repo,
 # with webpack to recompile .js and .css sources.
 config :user_service, UserServiceWeb.Endpoint,
   http: [port: 4000],
+  url: [host: "idp.localhost.development", port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -77,3 +78,7 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :user_service, UserServiceWeb.Pow.Mailer,
+  adapter: Bamboo.LocalAdapter,
+  from_address: "steve@idp.localhost.development"

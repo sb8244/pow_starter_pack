@@ -1,3 +1,11 @@
-<%= content_tag(:h3, "Hi,") %>
-<%= content_tag(:p, "Please use the following link to confirm your e-mail address:") %>
-<%= content_tag(:p, link(@url, to: @url)) %>
+<%# Template left unstyled, due to custom needs for any particular app %>
+
+<p>Hi,</p>
+
+<p>Welcome to APP_NAME, thanks for signing up! You're on your way to DO_SOMETHING_GREAT.</p>
+
+<p>To get started, <%= link("confirm your email address", to: @url) %> and follow the setup in app!</p>
+
+<p>We hope you enjoy THE_PRODUCT. You can reply to this email if you have any questions, we'll get back to you as soon as possible.</p>
+
+<p>Thanks,<br />The Team at APP_NAME</p>
