@@ -8,11 +8,11 @@
   <% end %>
 
   <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "a@a.com" %>
   <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
 
   <%= label f, :password %>
-  <%= password_input f, :password %>
+  <%= password_input f, :password, value: "password" %>
   <%= error_tag f, :password %>
 
   <div>
