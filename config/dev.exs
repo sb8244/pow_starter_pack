@@ -79,6 +79,7 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+# Follow instructions on Bamboo when setting up production mailer
 config :user_service, UserServiceWeb.Pow.Mailer,
   adapter: Bamboo.LocalAdapter,
   from_address: "steve@idp.localhost.development"

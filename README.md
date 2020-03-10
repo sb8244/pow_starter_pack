@@ -4,6 +4,6 @@
 - [x] Make cookie live longer than session (possibly persistent extension)
 - [x] Sign in with redirection
 - [x] SSO API server
-- [ ] Review all messages (Pow.Phoenix.Messages, [Pow Extension].Phoenix.Messages)
-- [ ] Setup mailer
+- [x] Review all messages (Pow.Phoenix.Messages, [Pow Extension].Phoenix.Messages)
+- [x] Setup mailer (local)
 - [ ] SSO API server auth (JWT token auth)
