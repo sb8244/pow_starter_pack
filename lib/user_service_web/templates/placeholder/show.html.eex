@@ -1,3 +1,5 @@
 <h1>Placeholder</h1>
 
 <pre><%= inspect Pow.Plug.current_user(@conn) %></pre>
+
+<%= link "Log Out", to: Routes.logout_path(@conn, :delete) %>
