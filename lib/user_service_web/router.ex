@@ -12,8 +12,13 @@ defmodule UserServiceWeb.Router do
     plug UserServiceWeb.Plug.RedirectTo
   end
 
-  pipeline :api do
+  pipeline :sso_api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :api_protected do
+    plug :accepts, ["json"]
+    plug Pow.Plug.RequireAuthenticated, error_handler: UserServiceWeb.Api.AuthErrorHandler
   end
 
   scope "/" do
@@ -38,9 +43,15 @@ defmodule UserServiceWeb.Router do
     get "/", PlaceholderController, :show
   end
 
-  scope "/sso_api", UserServiceWeb do
-    pipe_through :api
+  scope "/api", UserServiceWeb.Api do
+    pipe_through :api_protected
 
-    post "/verify", Sso.VerifyController, :create
+    get "/tokens/new", TokensController, :new
+  end
+
+  scope "/sso_api", UserServiceWeb.Sso do
+    pipe_through :sso_api
+
+    post "/verify", VerifyController, :create
   end
 end

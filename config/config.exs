@@ -10,8 +10,7 @@ use Mix.Config
 config :user_service,
   ecto_repos: [UserService.Repo],
   redis_uri: "redis://localhost:6379",
-  redis_namespace: "user-service-#{Mix.env()}",
-  sso_secret: "5JLgxF6lCAtgxc42e/Cg3lloPfnGicP1M1V6ZwQmnSmc5NIwzGs5X0ddF2mgP5f0Xl1nvi59sW8DcKovWXm0z8O3Bln82OAIgUM4"
+  redis_namespace: "user-service-#{Mix.env()}"
 
 config :user_service, :pow,
   cache_store_backend: UserServiceWeb.Pow.RedisCache,

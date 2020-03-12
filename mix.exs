@@ -45,7 +45,8 @@ defmodule UserService.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.18"},
       {:redix, ">= 0.0.0"},
-      {:bamboo, "~> 1.4"}
+      {:bamboo, "~> 1.4"},
+      {:joken, "~> 2.0"}
     ]
   end
 
