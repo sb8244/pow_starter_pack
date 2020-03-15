@@ -113,13 +113,11 @@ defmodule UserServiceWeb.Pow.RedisCache do
     {key, nil}
   end
 
-  defp unwrap([_namespace, key]), do: key
-  defp unwrap([_namespace | key]), do: key
+  defp unwrap([_app | [_namespace | key]]), do: key
 
   defp populate_values([], _config), do: []
 
   defp populate_values(records, config) do
-    config = Keyword.put(config, :namespace, :no_namespace)
     binary_keys = Enum.map(records, fn {key, nil} -> binary_redis_key(config, key) end)
 
     case Redix.command(UserService.Redix.instance_name(), ["MGET"] ++ binary_keys) do
@@ -153,11 +151,7 @@ defmodule UserServiceWeb.Pow.RedisCache do
     app_namespace = Application.get_env(:user_service, :redis_namespace)
     pow_namespace = Config.get(config, :namespace, "cache")
 
-    if pow_namespace == :no_namespace do
-      to_string(app_namespace)
-    else
-      "#{app_namespace}:#{pow_namespace}"
-    end
+    "#{app_namespace}:#{pow_namespace}"
   end
 
   # This is a human readable string, rather than a binary conversion that comes stock
