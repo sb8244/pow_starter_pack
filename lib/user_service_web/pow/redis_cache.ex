@@ -20,10 +20,16 @@ defmodule UserServiceWeb.Pow.RedisCache do
   end
 
   defp put_command(key, value, ttl) do
-    value = :erlang.term_to_binary(value)
-
+    value = value |> clean_value() |> :erlang.term_to_binary()
     ["SET", key, value, "PX", ttl]
   end
+
+  # Avoid writing the entire User struct into Redis
+  defp clean_value(%UserService.Users.User{id: id, guid: guid}) do
+    %{id: id, guid: guid}
+  end
+
+  defp clean_value(val), do: val
 
   @impl true
   def delete(config, key) do
@@ -49,6 +55,18 @@ defmodule UserServiceWeb.Pow.RedisCache do
   end
 
   @impl true
+  @doc """
+  Examples:
+
+  iex(47)> UserServiceWeb.Pow.RedisCache.all([ttl: 1800000, namespace: "credentials"], :_)
+    # all values
+
+  iex(46)> UserServiceWeb.Pow.RedisCache.all([ttl: 1800000, namespace: "credentials"], ["credentials", :_, :_, "6"])
+    [
+      {["credentials", "Elixir.UserService.Users.User", "user", "6"],
+      %{guid: "0c06d077-4fe0-48b1-b9eb-f9c6e2e6de62", id: 6}}
+    ]
+  """
   def all(config, match_spec) do
     compiled_match_spec = :ets.match_spec_compile([{{match_spec, :_}, [], [:"$_"]}])
 
@@ -101,6 +119,7 @@ defmodule UserServiceWeb.Pow.RedisCache do
   defp populate_values([], _config), do: []
 
   defp populate_values(records, config) do
+    config = Keyword.put(config, :namespace, :no_namespace)
     binary_keys = Enum.map(records, fn {key, nil} -> binary_redis_key(config, key) end)
 
     case Redix.command(UserService.Redix.instance_name(), ["MGET"] ++ binary_keys) do
@@ -134,7 +153,11 @@ defmodule UserServiceWeb.Pow.RedisCache do
     app_namespace = Application.get_env(:user_service, :redis_namespace)
     pow_namespace = Config.get(config, :namespace, "cache")
 
-    "#{app_namespace}:#{pow_namespace}"
+    if pow_namespace == :no_namespace do
+      to_string(app_namespace)
+    else
+      "#{app_namespace}:#{pow_namespace}"
+    end
   end
 
   # This is a human readable string, rather than a binary conversion that comes stock
