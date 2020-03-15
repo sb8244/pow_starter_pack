@@ -2,7 +2,8 @@ use Mix.Config
 
 config :user_service,
   api_signer_secret: "ER7zXdcKLDXf2gSny9NkZ38GnOLq/pJVc4ywicY7fM8w5ZKhc8lOxAVXroXSaYv8FVUvhVChDNNlbWFnBYWaPA0+0hD2WX5WJS2DXAawnhEOakGYv+pxvcYoIgJ93R4lSOkkjBl0CSSHIjzFpmufYe",
-  sso_secret: "5JLgxF6lCAtgxc42e/Cg3lloPfnGicP1M1V6ZwQmnSmc5NIwzGs5X0ddF2mgP5f0Xl1nvi59sW8DcKovWXm0z8O3Bln82OAIgUM4"
+  sso_secret: "5JLgxF6lCAtgxc42e/Cg3lloPfnGicP1M1V6ZwQmnSmc5NIwzGs5X0ddF2mgP5f0Xl1nvi59sW8DcKovWXm0z8O3Bln82OAIgUM4",
+  sso_cookie_domain: ".localhost.development"
 
 # Configure your database
 config :user_service, UserService.Repo,
@@ -34,9 +35,6 @@ config :user_service, UserServiceWeb.Endpoint,
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
-
-config :user_service,
-  sso_cookie_domain: ".localhost.development"
 
 # ## SSL Support
 #
