@@ -46,7 +46,8 @@ defmodule UserService.MixProject do
       {:pow, "~> 1.0.18"},
       {:redix, ">= 0.0.0"},
       {:bamboo, "~> 1.4"},
-      {:joken, "~> 2.0"}
+      {:joken, "~> 2.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

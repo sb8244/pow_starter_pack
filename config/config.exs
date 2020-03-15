@@ -25,11 +25,15 @@ config :user_service, :pow,
 
 # Configures the endpoint
 config :user_service, UserServiceWeb.Endpoint,
-  url: [host: "localhost"],
   secret_key_base: "1gFAHb0Z8SHK5afTHBYoSeg++nByjZCTGiGTxFAsZeGCTAYVIHVhXVGRZTW29cta",
   render_errors: [view: UserServiceWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: UserService.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "Da+AaQgF"]
+
+config :cors_plug,
+  origin: [],
+  max_age: 86400,
+  methods: ["GET", "POST"]
 
 # Configures Elixir's Logger
 config :logger, :console,

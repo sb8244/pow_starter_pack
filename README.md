@@ -8,6 +8,7 @@
 - [x] Setup mailer (local)
 - [x] SSO API server auth (JWT token auth)
   - [x] Add GUID to user for reference
+  - [x] CORS
 - [x] Do not store the full user in the session
 - [ ] UI
 

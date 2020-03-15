@@ -5,6 +5,9 @@ config :user_service,
   sso_secret: "5JLgxF6lCAtgxc42e/Cg3lloPfnGicP1M1V6ZwQmnSmc5NIwzGs5X0ddF2mgP5f0Xl1nvi59sW8DcKovWXm0z8O3Bln82OAIgUM4",
   sso_cookie_domain: ".localhost.development"
 
+config :cors_plug,
+  origin: ["http://test.localhost.development:4001"]
+
 # Configure your database
 config :user_service, UserService.Repo,
   username: "postgres",

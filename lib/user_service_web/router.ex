@@ -17,6 +17,7 @@ defmodule UserServiceWeb.Router do
   end
 
   pipeline :api_protected do
+    plug CORSPlug
     plug :accepts, ["json"]
     plug Pow.Plug.RequireAuthenticated, error_handler: UserServiceWeb.Api.AuthErrorHandler
   end
@@ -46,7 +47,7 @@ defmodule UserServiceWeb.Router do
   scope "/api", UserServiceWeb.Api do
     pipe_through :api_protected
 
-    get "/tokens/new", TokensController, :new
+    post "/tokens", TokensController, :create
   end
 
   scope "/sso_api", UserServiceWeb.Sso do
