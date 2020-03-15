@@ -25,8 +25,9 @@ defmodule UserServiceWeb.Pow.RedisCache do
   end
 
   # Avoid writing the entire User struct into Redis
+  # Must remain a User struct or errors occur from pow
   defp clean_value(%UserService.Users.User{id: id, guid: guid}) do
-    %{id: id, guid: guid}
+    %UserService.Users.User{id: id, guid: guid}
   end
 
   defp clean_value(val), do: val
