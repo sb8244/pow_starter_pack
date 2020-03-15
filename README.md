@@ -6,9 +6,10 @@
 - [x] SSO API server
 - [x] Review all messages (Pow.Phoenix.Messages, [Pow Extension].Phoenix.Messages)
 - [x] Setup mailer (local)
-- [ ] SSO API server auth (JWT token auth)
+- [x] SSO API server auth (JWT token auth)
   - [x] Add GUID to user for reference
 - [x] Do not store the full user in the session
+- [ ] UI
 
 # Tests
 - [ ] Redis Cache Tests
