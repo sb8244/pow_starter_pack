@@ -21,8 +21,8 @@ defmodule UserServiceWeb.Sso.VerifyController do
 
   defp serialize(user) do
     %{
-      id: user.id,
-      email: user.email
+      email: user.email,
+      guid: user.guid
     }
   end
 end
