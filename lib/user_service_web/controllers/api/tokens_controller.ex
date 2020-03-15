@@ -7,6 +7,7 @@ defmodule UserServiceWeb.Api.TokensController do
 
   defp payload(user) do
     %{
+      duration_in_seconds: UserService.Access.token_duration_in_seconds(),
       now_utc: :erlang.system_time(:seconds),
       subject: user.guid,
       token: UserService.Access.user_access_token(user)

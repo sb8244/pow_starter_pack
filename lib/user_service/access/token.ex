@@ -1,8 +1,6 @@
 defmodule UserService.Access.Token do
   use Joken.Config
 
-  @token_duration_minutes 60
-
   alias UserService.Access.Context
 
   @impl true
@@ -20,6 +18,6 @@ defmodule UserService.Access.Token do
   end
 
   defp expiration() do
-    :erlang.system_time(:seconds) + (@token_duration_minutes * 60)
+    :erlang.system_time(:seconds) + UserService.Access.token_duration_in_seconds()
   end
 end
