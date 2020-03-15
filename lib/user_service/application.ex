@@ -5,8 +5,8 @@ defmodule UserService.Application do
 
   def start(_type, _args) do
     children = [
-      UserService.Repo,
       UserService.Redix,
+      UserService.Repo,
       UserServiceWeb.Endpoint
     ]
 
