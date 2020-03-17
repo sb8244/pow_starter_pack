@@ -1,41 +1,39 @@
-<div class="card shadow border-0">
-  <div class="row">
-    <div class="col-sm login-container-padding bg-primary text-white">
-      <h2>Welcome to ThingCorp</h2>
-      <p>We help you do things—You are going to get so much done.</p>
-    </div>
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white login-container-padding">
+    <h2>Welcome to ThingCorp</h2>
+    <p>We help you do things—You are going to get so much done.</p>
+  </div>
 
-    <div class="col-sm login-container-padding">
-      <%= if get_flash(@conn, :info) do %>
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <% end %>
+  <div class="card shadow border-0 login-container-padding">
+    <%= if get_flash(@conn, :info) do %>
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <% end %>
 
-      <%= if get_flash(@conn, :error) do %>
-        <p class="alert alert-warning" role="alert"><%= get_flash(@conn, :error) %></p>
-      <% end %>
+    <%= if get_flash(@conn, :error) do %>
+      <p class="alert alert-warning" role="alert"><%= get_flash(@conn, :error) %></p>
+    <% end %>
 
-      <%= form_for @changeset, @action, [as: :user], fn f -> %>
-        <div class="form-group">
-          <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-          <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "a@a.com", class: "form-control" %>
-          <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-        </div>
-
-        <div class="form-group">
-          <%= label f, :password %>
-          <%= password_input f, :password, value: "password", class: "form-control" %>
-          <%= error_tag f, :password %>
-        </div>
-
-        <div class="btn-group w-100">
-          <%= submit "Sign in", class: "btn btn-primary w-50" %>
-          <%= link "Sign up", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-primary btn-light w-50" %>
-        </div>
-      <% end %>
-
-      <div class="text-center mt-3">
-        <%= link "Forgot password?", to: Routes.pow_reset_password_reset_password_path(@conn, :new) %>
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <div class="form-group">
+        <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+        <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "a@a.com", class: "form-control" %>
+        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
       </div>
+
+      <div class="form-group">
+        <%= label f, :password %>
+        <%= password_input f, :password, value: "password", class: "form-control" %>
+        <%= error_tag f, :password %>
+      </div>
+
+      <div class="btn-group w-100">
+        <%= submit "Sign in", class: "btn btn-primary w-50" %>
+        <%= link "Sign up", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-primary btn-light w-50" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= link "Forgot password?", to: Routes.pow_reset_password_reset_password_path(@conn, :new) %>
     </div>
   </div>
 </div>
