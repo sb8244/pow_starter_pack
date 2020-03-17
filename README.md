@@ -11,6 +11,7 @@
   - [x] CORS
 - [x] Do not store the full user in the session
 - [ ] UI
+  - [x] Bulma to BS4?
 
 # Tests
 - [ ] Redis Cache Tests

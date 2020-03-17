@@ -1,0 +1,18 @@
+$primary: #247BA0;
+
+@import "~bootstrap/scss/bootstrap";
+
+html, body {
+  height: 100%;
+
+  background: aliceblue;
+}
+
+body {
+  display: flex;
+  align-items: center;
+}
+
+.login-container-padding {
+  padding: 100px 50px;
+}
