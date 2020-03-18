@@ -10,8 +10,10 @@
   - [x] Add GUID to user for reference
   - [x] CORS
 - [x] Do not store the full user in the session
-- [ ] UI
+- [x] UI
   - [x] Bulma to BS4?
+- [ ] Capture user name on registration
+- [ ] Social login
 
 # Tests
 - [ ] Redis Cache Tests
