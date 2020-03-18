@@ -10,8 +10,16 @@ defmodule UserServiceWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), class: "help-block")
+      content_tag(:span, translate_error(error), class: "invalid-feedback")
     end)
+  end
+
+  def invalid_class(form, field) do
+    if Enum.any?(Keyword.get_values(form.errors, field)) do
+      "is-invalid text-danger"
+    else
+      ""
+    end
   end
 
   @doc """

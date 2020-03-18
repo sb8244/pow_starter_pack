@@ -1,28 +1,33 @@
-<h1>Register</h1>
-
-<%= form_for @changeset, @action, [as: :user], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "new#{:rand.uniform(99999999999)}@new.com" %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, value: "password" %>
-  <%= error_tag f, :password %>
-
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation, value: "password" %>
-  <%= error_tag f, :password_confirmation %>
-
-  <div>
-    <%= submit "Register" %>
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Sign up now</h2>
+    <p>We'll confirm your email and then continue with setup.</p>
   </div>
-<% end %>
 
+  <div class="card card-padded shadow border-0">
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <div class="form-group">
+        <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: invalid_class(f, Pow.Ecto.Schema.user_id_field(@changeset)) %>
+        <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "new#{:rand.uniform(99999999999)}@new.com", class: "form-control #{invalid_class(f, Pow.Ecto.Schema.user_id_field(@changeset))}" %>
+        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      </div>
 
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>
+      <div class="form-group">
+        <%= label f, :password, class: invalid_class(f, :password) %>
+        <%= password_input f, :password, value: "password", class: "form-control #{invalid_class(f, :password)}" %>
+        <%= error_tag f, :password %>
+      </div>
+
+      <div class="form-group">
+        <%= label f, :password_confirmation, class: invalid_class(f, :password_confirmation) %>
+        <%= password_input f, :password_confirmation, value: "password", class: "form-control #{invalid_class(f, :password_confirmation)}" %>
+        <%= error_tag f, :password_confirmation %>
+      </div>
+
+      <div class="btn-group w-100">
+        <%= submit "Sign up", class: "btn btn-primary w-50" %>
+        <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>
+      </div>
+    <% end %>
+  </div>
+</div>

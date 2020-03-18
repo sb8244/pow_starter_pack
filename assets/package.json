@@ -5,7 +5,9 @@
     "deploy": "webpack --mode production",
     "watch": "webpack --mode development --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "phoenix_html": "../deps/phoenix_html"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",

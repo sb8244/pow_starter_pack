@@ -1,10 +1,10 @@
 <div class="card-group">
-  <div class="card shadow border-0 bg-primary text-white login-container-padding">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
     <h2>Welcome to ThingCorp</h2>
     <p>We help you do things—You are going to get so much done.</p>
   </div>
 
-  <div class="card shadow border-0 login-container-padding">
+  <div class="card shadow border-0 card-padded">
     <%= if get_flash(@conn, :info) do %>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <% end %>
@@ -17,18 +17,16 @@
       <div class="form-group">
         <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
         <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), value: "a@a.com", class: "form-control" %>
-        <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
       </div>
 
       <div class="form-group">
-        <%= label f, :password %>
-        <%= password_input f, :password, value: "password", class: "form-control" %>
-        <%= error_tag f, :password %>
+        <%= label f, :password, class: invalid_class(f, :password) %>
+        <%= password_input f, :password, value: "password", class: "form-control #{invalid_class(f, :password)}" %>
       </div>
 
       <div class="btn-group w-100">
         <%= submit "Sign in", class: "btn btn-primary w-50" %>
-        <%= link "Sign up", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-primary btn-light w-50" %>
+        <%= link "Sign up", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-light w-50" %>
       </div>
     <% end %>
 
