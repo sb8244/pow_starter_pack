@@ -10,8 +10,6 @@
   </div>
 
   <div class="card card-padded shadow border-0">
-    <!--<pre style="white-space: pre-wrap;"><%= inspect Pow.Plug.current_user(@conn) %></pre>-->
-
     <p>You're logged in as <%= Pow.Plug.current_user(@conn).email %></p>
 
     <%= link "Update Info", to: Routes.pow_registration_path(@conn, :edit) %>
