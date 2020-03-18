@@ -3,8 +3,12 @@ defmodule UserService.Users.User do
   use Pow.Ecto.Schema
   use Pow.Extension.Ecto.Schema, extensions: [PowResetPassword, PowEmailConfirmation]
 
+  import Ecto.Changeset
+
   schema "users" do
     field(:guid, Ecto.UUID, read_after_writes: true)
+    field(:first_name, Ecto.TrimmedString)
+    field(:last_name, Ecto.TrimmedString)
 
     pow_user_fields()
 
@@ -15,5 +19,6 @@ defmodule UserService.Users.User do
     user_or_changeset
     |> pow_changeset(attrs)
     |> pow_extension_changeset(attrs)
+    |> cast(attrs, [:first_name, :last_name])
   end
 end

@@ -12,6 +12,20 @@
         <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
       </div>
 
+      <div class="form-row">
+        <div class="col-md form-group">
+          <%= label f, :first_name, class: invalid_class(f, :first_name) %>
+          <%= text_input f, :first_name, value: "Steve", class: "form-control #{invalid_class(f, :first_name)}" %>
+          <%= error_tag f, :first_name %>
+        </div>
+
+        <div class="col-md form-group">
+          <%= label f, :last_name, class: invalid_class(f, :last_name) %>
+          <%= text_input f, :last_name, value: "Bussey", class: "form-control #{invalid_class(f, :last_name)}" %>
+          <%= error_tag f, :last_name %>
+        </div>
+      </div>
+
       <div class="form-group">
         <%= label f, :password, class: invalid_class(f, :password) %>
         <%= password_input f, :password, value: "password", class: "form-control #{invalid_class(f, :password)}" %>
