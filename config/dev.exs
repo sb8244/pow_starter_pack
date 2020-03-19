@@ -25,6 +25,12 @@ config :user_service, UserService.Repo,
 # with webpack to recompile .js and .css sources.
 config :user_service, UserServiceWeb.Endpoint,
   http: [port: 4000],
+  # https: [
+  #   port: 4000,
+  #   cipher_suite: :strong,
+  #   certfile: "priv/cert/selfsigned.pem",
+  #   keyfile: "priv/cert/selfsigned_key.pem"
+  # ],
   url: [host: "idp.localhost.development", port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -88,3 +94,21 @@ config :phoenix, :plug_init_mode, :runtime
 config :user_service, UserServiceWeb.Pow.Mailer,
   adapter: Bamboo.LocalAdapter,
   from_address: "steve@idp.localhost.development"
+
+# You can configure yours in the dev.secret.exs file
+config :user_service, :pow_assent,
+  providers: [
+    github: [
+      client_id: "A",
+      client_secret: "B",
+      strategy: Assent.Strategy.Github
+    ],
+    # Requires SSL to be used
+    salesloft: [
+      client_id: "A",
+      client_secret: "B",
+      strategy: SalesLoft.Provider
+    ]
+  ]
+
+import_config "dev.secret.exs"

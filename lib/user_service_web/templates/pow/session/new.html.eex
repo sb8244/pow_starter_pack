@@ -33,5 +33,9 @@
     <div class="text-center mt-3">
       <%= link "Forgot password?", to: Routes.pow_reset_password_reset_password_path(@conn, :new) %>
     </div>
+
+    <%= for link <- PowAssent.Phoenix.ViewHelpers.provider_links(@conn) do %>
+      <%= content_tag(:span, link) %>
+    <% end %>
   </div>
 </div>

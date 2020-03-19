@@ -12,8 +12,8 @@
 - [x] Do not store the full user in the session
 - [x] UI
   - [x] Bulma to BS4?
-- [ ] Capture user name on registration
-- [ ] Social login
+- [x] Capture user name on registration
+- [x] Social login
 
 # Tests
 - [ ] Redis Cache Tests
