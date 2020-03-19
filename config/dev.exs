@@ -111,4 +111,5 @@ config :user_service, :pow_assent,
     ]
   ]
 
-import_config "dev.secret.exs"
+# Wildcard makes it optional
+import_config "./*dev.secret.exs"

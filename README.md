@@ -14,6 +14,8 @@
   - [x] Bulma to BS4?
 - [x] Capture user name on registration
 - [x] Social login
+  - [ ] Logging on all failure (like add-user-id triggering)
+- [ ] 2FA time code
 
 # Tests
 - [ ] Redis Cache Tests
