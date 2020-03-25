@@ -1,0 +1,29 @@
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Setup 2FA</h2>
+    <p>Two factor auth is a great way to protect your account. Let's set it up now.</p>
+  </div>
+
+  <div class="card card-padded shadow border-0">
+    <%= form_for @changeset, @action, [as: :totp], fn f -> %>
+      <%= hidden_input(f, :secret, value: @secret) %>
+
+      <p><%= img_tag("data:image/svg+xml; base64, #{@svg}", width: "150px") %></p>
+      <p>
+        Scan the above QR Code using Google Authenticator, or a similar 2FA
+        application. Enter the code returned by your app to activate 2FA.
+      </p>
+
+      <div class="form-group">
+        <%= label f, :code, class: invalid_class(f, :code) %>
+        <%= text_input f, :code, class: "form-control #{invalid_class(f, :code)}", required: true %>
+        <%= error_tag f, :code %>
+      </div>
+
+      <div class="btn-group w-100">
+        <%= submit "Activate", class: "btn btn-primary w-50" %>
+        <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>
+      </div>
+    <% end %>
+  </div>
+</div>

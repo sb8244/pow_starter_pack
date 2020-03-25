@@ -1,7 +1,7 @@
 defmodule UserServiceWeb.Pow.Routes do
   use Pow.Phoenix.Routes
-  alias UserServiceWeb.Router.Helpers, as: Routes
 
+  alias UserServiceWeb.Router.Helpers, as: Routes
   alias UserServiceWeb.Plug.RedirectTo
 
   @impl true

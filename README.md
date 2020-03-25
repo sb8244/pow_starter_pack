@@ -15,7 +15,8 @@
 - [x] Capture user name on registration
 - [x] Social login
   - [ ] Logging on all failure (like add-user-id triggering)
-- [ ] 2FA time code
+- [x] 2FA
+- [ ] invites
 
 # Tests
 - [ ] Redis Cache Tests

@@ -1,0 +1,9 @@
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Manage 2FA</h2>
+    <p>Two factor auth is a great way to protect your account.</p>
+  </div>
+
+  <div class="card card-padded shadow border-0">
+  </div>
+</div>

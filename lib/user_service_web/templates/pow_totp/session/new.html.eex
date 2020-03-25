@@ -1,0 +1,26 @@
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Enter 2FA</h2>
+    <p>Two factor auth is enabled for your account. Enter your code to continue.</p>
+  </div>
+
+  <div class="card card-padded shadow border-0">
+    <%= form_for @changeset, @action, [as: :totp], fn f -> %>
+      <p>
+        Enter your 2FA code to sign in. You can find this code in Google Authenticator, or whatever
+        app you used to setup 2FA.
+      </p>
+
+      <div class="form-group">
+        <%= label f, :code, class: invalid_class(f, :code) %>
+        <%= text_input f, :code, class: "form-control #{invalid_class(f, :code)}", required: true %>
+        <%= error_tag f, :code %>
+      </div>
+
+      <div class="btn-group w-100">
+        <%= submit "Sign in", class: "btn btn-primary w-50" %>
+        <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>
+      </div>
+    <% end %>
+  </div>
+</div>

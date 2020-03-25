@@ -45,6 +45,9 @@ defmodule UserServiceWeb.Endpoint do
     persistent_session_ttl: 1000 * 60 * 60 * 24 * 60
 
   plug UserServiceWeb.Plug.FetchUserPlug
+
+  plug PowTotp.Plug.Totp, router: UserServiceWeb.Router
+
   plug UserService.Sso.plug()
 
   plug UserServiceWeb.Router

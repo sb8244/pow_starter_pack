@@ -1,7 +1,7 @@
 defmodule UserServiceWeb.Router do
   use UserServiceWeb, :router
   use Pow.Phoenix.Router
-  use Pow.Extension.Phoenix.Router, extensions: [PowResetPassword, PowEmailConfirmation]
+  use Pow.Extension.Phoenix.Router, extensions: [PowResetPassword, PowEmailConfirmation, PowTotp]
   use PowAssent.Phoenix.Router
 
   pipeline :browser do
@@ -41,7 +41,7 @@ defmodule UserServiceWeb.Router do
     get "/logout", Pow.Phoenix.SessionController, :delete, as: :logout
     get "/register", Pow.Phoenix.RegistrationController, :new, as: :register
 
-    if Mix.env == :dev do
+    if Mix.env() == :dev do
       forward "/sent_emails", Bamboo.SentEmailViewerPlug
     end
   end

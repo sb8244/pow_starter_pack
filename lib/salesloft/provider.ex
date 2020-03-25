@@ -23,12 +23,14 @@ defmodule SalesLoft.Provider do
 
   @impl true
   def normalize(_config, %{"data" => user}) do
-    {:ok, %{
-      "sub" => user["guid"],
-      "given_name" => user["first_name"],
-      "family_name" => user["last_name"],
-      "email" => user["email"],
-      "email_verified" => false # change to true to bypass need for verification
-    }}
+    {:ok,
+     %{
+       "sub" => user["guid"],
+       "given_name" => user["first_name"],
+       "family_name" => user["last_name"],
+       "email" => user["email"],
+       # change to true to bypass need for verification
+       "email_verified" => false
+     }}
   end
 end
