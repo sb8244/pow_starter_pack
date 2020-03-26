@@ -5,6 +5,8 @@
   </div>
 
   <div class="card card-padded shadow border-0">
+    <%= render UserServiceWeb.LayoutView, "_flash.html", assigns %>
+
     <%= form_for @changeset, @action, [as: :totp], fn f -> %>
       <%= hidden_input(f, :secret, value: @secret) %>
 

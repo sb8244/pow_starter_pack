@@ -5,13 +5,7 @@
   </div>
 
   <div class="card shadow border-0 card-padded">
-    <%= if get_flash(@conn, :info) do %>
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <% end %>
-
-    <%= if get_flash(@conn, :error) do %>
-      <p class="alert alert-warning" role="alert"><%= get_flash(@conn, :error) %></p>
-    <% end %>
+    <%= render UserServiceWeb.LayoutView, "_flash.html", assigns %>
 
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
       <div class="form-group">

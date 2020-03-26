@@ -5,6 +5,8 @@
   </div>
 
   <div class="card card-padded shadow border-0">
+    <%= render UserServiceWeb.LayoutView, "_flash.html", assigns %>
+
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
 
       <div class="form-group">
@@ -49,6 +51,17 @@
         <%= label f, :password_confirmation, "Password confirmation (if changing)", class: invalid_class(f, :password_confirmation) %>
         <%= password_input f, :password_confirmation, class: "form-control #{invalid_class(f, :password_confirmation)}" %>
         <%= error_tag f, :password_confirmation %>
+      </div>
+
+      <div class="form-group">
+        <label>Two Factor Auth</label>
+        <div>
+          <%= if Pow.Plug.current_user(@conn).totp_activated_at do %>
+            <%= link "Manage 2FA", to: Routes.pow_totp_setup_path(@conn, :edit), class: "btn btn-secondary w-50" %>
+          <% else %>
+            <%= link "Setup 2FA", to: Routes.pow_totp_setup_path(@conn, :new), class: "btn btn-secondary w-50" %>
+          <% end %>
+        </div>
       </div>
 
       <div class="btn-group w-100">
