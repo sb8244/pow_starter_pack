@@ -50,8 +50,7 @@ defmodule UserService.MixProject do
       {:cors_plug, "~> 2.0"},
       {:pow_assent, "~> 0.4.6"},
       {:certifi, "~> 2.4"},
-      {:ssl_verify_fun, "~> 1.1"},
-      {:pow_totp, path: "../pow_totp"}
+      {:ssl_verify_fun, "~> 1.1"}
     ]
   end
 
