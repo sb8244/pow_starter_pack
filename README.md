@@ -40,6 +40,8 @@ Update `config/dev.secret.exs` to include your sensitive environment variables. 
 I setup a basic TOTP implementation as a pow extension to see what writing a custom extension was like. I don't think I'm going to finish
 it at the moment, but it can be found on the branch `pow-totp`.
 
+You can find the extension (not finished) at https://github.com/sb8244/pow_totp.
+
 # User Consumer
 
 There is an included sub-project that implements the consumer side of SSO. It has code for both server-server
