@@ -26,6 +26,15 @@ as:
 
 You should also startup the user consumer if you want to see the SSO flow in action.
 
+## Sent Emails
+
+You can view sent emails (in-memory only) at http://idp.localhost.development:4000/sent_emails. Use this to confirm any created users.
+
+## OAuth Login
+
+You can create a GitHub app to test out OAuth connection. The SalesLoft one is just there to see how Assent works with custom OAuth providers.
+Update `config/dev.secret.exs` to include your sensitive environment variables. It's not version-controlled.
+
 # User Consumer
 
 There is an included sub-project that implements the consumer side of SSO. It has code for both server-server
