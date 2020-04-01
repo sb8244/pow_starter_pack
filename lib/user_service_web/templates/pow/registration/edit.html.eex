@@ -53,6 +53,17 @@
         <%= error_tag f, :password_confirmation %>
       </div>
 
+      <div class="form-group">
+        <label>Two Factor Auth</label>
+        <div>
+          <%= if Pow.Plug.current_user(@conn).totp_activated_at do %>
+            <%= link "Manage 2FA", to: Routes.pow_totp_setup_path(@conn, :edit), class: "btn btn-secondary w-50" %>
+          <% else %>
+            <%= link "Setup 2FA", to: Routes.pow_totp_setup_path(@conn, :new), class: "btn btn-secondary w-50" %>
+          <% end %>
+        </div>
+      </div>
+
       <div class="btn-group w-100">
         <%= submit "Update", class: "btn btn-primary w-50" %>
         <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>

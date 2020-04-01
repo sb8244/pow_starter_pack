@@ -46,6 +46,8 @@ defmodule UserServiceWeb.Endpoint do
 
   plug UserServiceWeb.Plug.FetchUserPlug
 
+  plug PowTotp.Plug.Totp, router: UserServiceWeb.Router
+
   plug UserService.Sso.plug()
 
   plug UserServiceWeb.Router
