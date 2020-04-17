@@ -1,0 +1,29 @@
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Invite Your Teammates</h2>
+    <p>We'll send an email to your teammate for them to join your team.</p>
+  </div>
+
+  <div class="card card-padded shadow border-0">
+    <%= render UserServiceWeb.LayoutView, "_flash.html", assigns %>
+
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= label f, :email, class: invalid_class(f, :email) %>
+        <%= text_input f, :email, class: "form-control #{invalid_class(f, :email)}", required: true %>
+        <%= error_tag f, :email %>
+      </div>
+
+      <div class="btn-group w-100">
+        <%= submit "Send email", class: "btn btn-primary w-50" %>
+        <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>
+      </div>
+    <% end %>
+  </div>
+</div>

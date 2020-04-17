@@ -1,0 +1,16 @@
+<div class="card-group">
+  <div class="card shadow border-0 bg-primary text-white card-padded">
+    <h2>Invite Your Teammates</h2>
+    <p>We'll send an email to your teammate for them to join your team.</p>
+  </div>
+
+  <div class="card card-padded shadow border-0">
+    <p>
+      You can send your teammate the following URL: <a href="<%= @url %>"><%= @url %></a>
+    </p>
+
+    <div class="btn-group w-100">
+      <%= link "Cancel", to: Routes.pow_session_path(@conn, :new), class: "btn btn-light w-50" %>
+    </div>
+  </div>
+</div>

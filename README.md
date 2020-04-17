@@ -75,8 +75,10 @@ setup in the previous section.
 - [x] Social login
   - [ ] Logging on all failure (like add-user-id triggering)
 - [x] 2FA
-- [ ] invites
+- [o] invites
+  - [x] Basic setup
   - [ ] Attach arbitrary attributes to the invite (is Pow okay for this?)
+  - [ ] View all pending invitations sent by the current user (user enumeration vector?)
 - [ ] Admin interface to manage users
   - [ ] Manually confirm emails
   - [ ] View user information

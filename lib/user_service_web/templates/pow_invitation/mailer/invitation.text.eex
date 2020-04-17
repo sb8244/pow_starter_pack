@@ -1,0 +1,10 @@
+Hi,
+
+You've been invited to join <%= @invited_by_user_id %> on APP_NAME. Please use the following link to accept your invitation:
+
+<%= @url %>
+
+If you have any questions, you can reply to this email and we'll get back to you!
+
+Thanks!
+The Team at APP_NAME

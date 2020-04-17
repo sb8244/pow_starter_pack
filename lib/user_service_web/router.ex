@@ -1,7 +1,7 @@
 defmodule UserServiceWeb.Router do
   use UserServiceWeb, :router
   use Pow.Phoenix.Router
-  use Pow.Extension.Phoenix.Router, extensions: [PowResetPassword, PowEmailConfirmation]
+  use Pow.Extension.Phoenix.Router, extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation]
   use PowAssent.Phoenix.Router
 
   pipeline :browser do
