@@ -83,6 +83,9 @@ setup in the previous section.
   - [ ] Manually confirm emails
   - [ ] View user information
   - [ ] Send reset password link
+- [ ] Team concept?
+  - I'm a bit unsure if I want to introduce this here or not. It should be where
+  invites are, or the 2 systems would need to cross talk about invites.
 
 ## Tests
 - [ ] Redis Cache Tests
